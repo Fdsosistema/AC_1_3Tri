@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -12,12 +12,16 @@ import { ToastController } from '@ionic/angular';
   standalone: false,
 })
 export class HomePage {
-CEP: Observable<any> | undefined
+cepP:any = null;
+cep:string ='';
 
   constructor(private rt: Router, private http: HttpClient, public toastC: ToastController) {}
 
-OnInit(){
-this.CEP = this.http.get(`http://viacep.com.br/`);
-}
+
+consultar(){
+this.http.get(`https://viacep.com.br/ws/${this.cep}/json/`).subscribe((res:any) => {
+  this.cepP = res;
+})
+};
 
 }

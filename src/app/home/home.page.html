@@ -1,5 +1,8 @@
 
 <ion-content [fullscreen]="true">
-<ion-input max="8" min="0" type="number" placeholder="CEP" [(ngModel)]="CEP"></ion-input><br>
-
+<ion-input max="8" min="0" type="number" placeholder="CEP" [(ngModel)]="cep"></ion-input><br>
+<ion-button (click)="consultar()">consultar</ion-button>
+<ion-label *ngIf="cepP"?>
+AAAA: {{cepP.localidade}}
+</ion-label>
 </ion-content>
