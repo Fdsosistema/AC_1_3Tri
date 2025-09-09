@@ -1,12 +1,16 @@
 <ion-content [fullscreen]="true">
-  <label><strong>Pesquisar com o CEP</strong></label
-  ><br />
-  <ion-input placeholder="Digite o CEP:" [(ngModel)]="cep"></ion-input><br />
 
+ <div style="padding: 20%;">
+  <label><h5><strong>Pesquisar com o CEP</strong></h5></label
+  ><br />
+  <ion-item>
+  <ion-input placeholder="Digite o CEP:" [(ngModel)]="cep"></ion-input><br />
+</ion-item>
   <br /><br />
 
-  <label><strong>Não tem o CEP? Use esta opção</strong></label
+  <label><h5><strong>Não tem o CEP? Use esta opção</strong></h5></label
   ><br /><br />
+
 
   <ion-item
     ><ion-input
@@ -24,31 +28,42 @@
     ><ion-input
       placeholder="Digite o logradouro:"
       [(ngModel)]="logradouro"
-    ></ion-input></ion-item
-  ><br />
+    ></ion-input></ion-item>
 
+    <br />
   <br />
-  <ion-button (click)="consultar()">consultar</ion-button>
-
+  <ion-button (click)="consultar()" expand="block">consultar</ion-button>
+<br>
   <div *ngIf="cepP">
-    <p><strong>CEP:</strong> {{ cepP.cep }}</p>
-    <p><strong>Bairro:</strong> {{ cepP.bairro }}</p>
-    <p><strong>Estado:</strong> {{ cepP.uf }}</p>
-    <p><strong>Cidade:</strong> {{ cepP.localidade }}</p>
-    <p><strong>logradouro:</strong> {{ cepP.logradouro }}</p>
+    <ion-item>
+    <h5><strong>CEP:</strong> {{ cepP.cep }}</h5>
+    </ion-item>
+    <ion-item>
+    <h5><strong>Bairro:</strong> {{ cepP.bairro }}</h5>
+    </ion-item>
+    <ion-item>
+    <h5><strong>Estado:</strong> {{ cepP.uf }}</h5>
+    </ion-item>
+    <ion-item>
+    <h5><strong>Cidade:</strong> {{ cepP.localidade }}</h5>
+    </ion-item>
+    <ion-item>
+    <h5><strong>logradouro:</strong> {{ cepP.logradouro }}</h5>
+    </ion-item>
     <br /><br />
   </div>
 
-  <div>
-    <ion-list>
-      <ion-item *ngFor="let list of (cepL | async)">
-        <p><strong>CEP:</strong> {{ cepL.cep }}</p>
+  <div *ngIf="cepL">
+    <ion-list *ngFor="let cepL of cepL">
+<ion-card>
+        <ion-card-subtitle><strong>CEP:</strong><strong> {{ cepL.cep }} </strong></ion-card-subtitle>
         <p><strong>Bairro:</strong> {{ cepL.bairro }}</p>
         <p><strong>Estado:</strong> {{ cepL.uf }}</p>
         <p><strong>Cidade:</strong> {{ cepL.localidade }}</p>
         <p><strong>logradouro:</strong> {{ cepL.logradouro }}</p>
         <br /><br />
-      </ion-item>
+</ion-card>
     </ion-list>
   </div>
+</div>
 </ion-content>
