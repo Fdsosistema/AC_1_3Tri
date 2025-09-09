@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -12,16 +14,27 @@ import { FormsModule } from '@angular/forms';
   standalone: false,
 })
 export class HomePage {
-cepP:any = null;
-cep:string ='';
+cep: string ='';
+cepP: any;
+cepL:any;
+//pesquisa
+logradouro: string ='';
+estado:string ='';
+cidade:string ='';
 
-  constructor(private rt: Router, private http: HttpClient, public toastC: ToastController) {}
-
+  constructor(private rt: Router, private http: HttpClient, public toastC: ToastController)  {}
 
 consultar(){
-this.http.get(`https://viacep.com.br/ws/${this.cep}/json/`).subscribe((res:any) => {
-  this.cepP = res;
-})
+  if(this.cep){
+   this.http.get(`https://viacep.com.br/ws/${this.cep}/json/`).subscribe( (res) => {
+    this.cepP = res;
+});
+}else if(this.cidade && this.logradouro && this.estado){
+ this.http.get(`https://viacep.com.br/ws/${this.estado}/${this.cidade}/${this.logradouro}/json/`).subscribe ((res) => {
+  this.cepL =res;
+});
+}
+
 };
 
 }
